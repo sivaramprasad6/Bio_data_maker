@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="te">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telugu Marriage Biodata</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Tiro+Telugu:ital@0;1&display=swap" rel="stylesheet">
+    <style>
+        :root{--primary-red:#a31d1d;--primary-gold:#c2983b;--bg-cream:#fcf8ed}
+        *{box-sizing:border-box;margin:0;padding:0}
+        body{background-color:#e5e7eb;font-family:"Tiro Telugu",serif;display:flex;justify-content:center;padding:20px;min-height:100vh}
+        .canvas-container{width:800px;background-color:var(--bg-cream);position:relative;box-shadow:0 12px 30px rgba(163,29,29,.25);border:10px solid var(--primary-red);outline:4px double var(--primary-gold);outline-offset:-7px;padding:18px;border-radius:4px}
+        .inner-border{border:2px solid var(--primary-gold);box-shadow:inset 0 0 0 3px rgba(163,29,29,.15);padding:20px 25px 25px;height:100%;position:relative;background-image:radial-gradient(circle at 10px 10px,rgba(194,152,59,.12) 2px,transparent 0),radial-gradient(circle at 10px 10px,rgba(163,29,29,.08) 1px,transparent 0);background-size:24px 24px}
+        .corner-svg{position:absolute;width:82px;height:82px;z-index:30;pointer-events:none;filter:drop-shadow(1px 1px 2px rgba(0,0,0,.15))}
+        .corner-tl{top:-14px;left:-14px}.corner-tr{top:-14px;right:-14px}.corner-bl{bottom:-14px;left:-14px}.corner-br{bottom:-14px;right:-14px}
+        .toran-header-wrapper{margin:-10px -15px 12px;overflow:hidden}
+        .toran-svg{width:100%;height:38px;display:block}
+        .text-red-theme{color:var(--primary-red)}.bg-red-theme{background-color:var(--primary-red)}
+        .editable:hover{background-color:rgba(0,0,0,.05);outline:1px dashed #ccc;cursor:text}
+        .editable:focus{background-color:#fff;outline:2px solid var(--primary-gold)}
+        .image-upload-wrapper{position:relative;cursor:pointer;border:4px double var(--primary-gold);border-radius:8px;display:flex;align-items:center;justify-content:center;overflow:hidden;background-color:#f0f0f0;width:100%;height:200px;background-size:cover;background-position:center;transition:all .2s}
+        .image-upload-wrapper:hover{background-color:#e0e0e0;border-color:#a31d1d}
+        .image-upload-wrapper img{width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0;z-index:10}
+        .image-placeholder-text{position:relative;z-index:5;color:#999;text-align:center;pointer-events:none;font-size:14px}
+        .cropper-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(10,10,10,.88);display:none;align-items:center;justify-content:center;z-index:9999;backdrop-filter:blur(10px);padding:15px}
+        .cropper-box{background:#18181b;border:1px solid #3f3f46;border-radius:20px;padding:20px;max-width:650px;width:100%;max-height:96vh;box-shadow:0 25px 60px rgba(0,0,0,.85);display:flex;flex-direction:column;overflow-y:auto}
+        .cropper-header{display:flex;justify-content:space-between;align-items:center;color:#f4f4f5;padding-bottom:12px;border-bottom:1px solid #27272a;margin-bottom:12px}
+        .cropper-header h3{font-size:1.15rem;font-weight:700;color:#facc15;display:flex;align-items:center;gap:8px;margin:0}
+        .cropper-view-area{position:relative;width:100%;height:380px;background:#09090b;border-radius:12px;overflow:hidden;display:flex;align-items:center;justify-content:center;touch-action:none;cursor:grab;user-select:none;border:1px solid #27272a}
+        .cropper-view-area:active{cursor:grabbing}
+        .cropper-view-area img{max-width:none;max-height:none;position:absolute;pointer-events:none;transition:none;transform-origin:center center}
+        .crop-frame-mask{position:absolute;top:0;left:0;right:0;bottom:0;pointer-events:none;z-index:20;display:flex;align-items:center;justify-content:center}
+        .crop-target-box{width:220px;height:293px;box-shadow:0 0 0 9999px rgba(0,0,0,.65);position:relative;border-radius:8px;outline:2px solid #facc15}
+        .crop-target-box::before,.crop-target-box::after{content:"";position:absolute;width:16px;height:16px;border-color:#facc15;border-style:solid}
+        .crop-target-box::before{top:-2px;left:-2px;border-width:4px 0 0 4px;border-top-left-radius:6px}
+        .crop-target-box::after{top:-2px;right:-2px;border-width:4px 4px 0 0;border-top-right-radius:6px}
+        .crop-target-bottom-corners::before,.crop-target-bottom-corners::after{content:"";position:absolute;width:16px;height:16px;border-color:#facc15;border-style:solid}
+        .crop-target-bottom-corners::before{bottom:-2px;left:-2px;border-width:0 0 4px 4px;border-bottom-left-radius:6px}
+        .crop-target-bottom-corners::after{bottom:-2px;right:-2px;border-width:0 4px 4px 0;border-bottom-right-radius:6px}
+        .crop-grid-line-v1,.crop-grid-line-v2{position:absolute;top:0;bottom:0;width:1px;background:rgba(250,204,21,.35)}
+        .crop-grid-line-v1{left:33.33%}.crop-grid-line-v2{left:66.66%}
+        .crop-grid-line-h1,.crop-grid-line-h2{position:absolute;left:0;right:0;height:1px;background:rgba(250,204,21,.35)}
+        .crop-grid-line-h1{top:33.33%}.crop-grid-line-h2{top:66.66%}
+        .cropper-toolbar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;margin-top:12px;padding:8px 12px;background:#27272a;border-radius:12px}
+        .tool-btn-group{display:flex;align-items:center;gap:6px}
+        .tool-btn{background:#3f3f46;color:#e4e4e7;border:none;padding:7px 12px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;transition:all .15s ease;display:flex;align-items:center;gap:5px}
+        .tool-btn:hover{background:#52525b;color:#fff}
+        .tool-btn.active-toggle{background:#ca8a04;color:#fff}
+        .cropper-box .controls{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:10px}
+        .cropper-box .controls button{background:#ca8a04;color:#fff;border:none;padding:10px 24px;border-radius:30px;font-weight:700;font-size:15px;cursor:pointer;transition:.2s;min-width:100px}
+        .cropper-box .controls button:hover{background:#eab308;transform:scale(1.02)}
+        .cropper-box .controls button.danger{background:#52525b}
+        .cropper-box .controls button.danger:hover{background:#71717a}
+        .cropper-box .slider-group{display:flex;align-items:center;gap:12px;margin-top:8px;flex-wrap:wrap;justify-content:center;padding:6px 14px;background:#27272a;border-radius:40px}
+        .cropper-box .slider-group label{font-weight:600;color:#e4e4e7;font-size:13px;display:flex;align-items:center;gap:6px}
+        .cropper-box .slider-group input[type="range"]{width:130px;accent-color:#facc15;background:#444;height:4px;border-radius:2px}
+        .close-btn{background:none;border:none;color:#aaa;font-size:24px;cursor:pointer;padding:0 8px}
+        .close-btn:hover{color:#fff}
+        .detail-row{display:flex;margin-bottom:10px;font-size:1.05rem;border-bottom:1px dashed rgba(163,29,29,.15);padding-bottom:4px;align-items:flex-start;position:relative}
+        .detail-icon{width:28px;color:var(--primary-red);text-align:center;margin-right:8px;flex-shrink:0;margin-top:2px}
+        .detail-label{width:150px;font-weight:700;color:var(--primary-red);flex-shrink:0}
+        .detail-colon{margin-right:12px;color:var(--primary-red);font-weight:700;flex-shrink:0}
+        .detail-value{flex:1;color:#333;word-break:break-word}
+        .remove-field-btn{position:absolute;right:-22px;top:2px;background:#ef4444;color:#fff;border:none;border-radius:50%;width:18px;height:18px;font-size:11px;cursor:pointer;display:none;align-items:center;justify-content:center;line-height:1}
+        .detail-row:hover .remove-field-btn{display:flex}
+        .horoscope-box{border:3px solid var(--primary-red);border-radius:8px;overflow:hidden;margin-top:20px;background:#fff}
+        .horoscope-title{background-color:var(--primary-red)!important;color:#fff!important;text-align:center;padding:5px;font-size:1.1rem;font-weight:700}
+        .rasi-grid{display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:repeat(4,1fr);width:100%;height:230px;background:#fff}
+        .rasi-cell{border:1px solid rgba(163,29,29,.4);display:flex;align-items:center;justify-content:center;text-align:center;font-size:1rem;color:#1e3a8a;padding:2px;font-weight:500}
+        .rasi-center{grid-column:2/4;grid-row:2/4;display:flex;align-items:center;justify-content:center;text-align:center;font-weight:700;color:var(--primary-red);background-color:var(--bg-cream);border:1px solid rgba(163,29,29,.4);font-size:.9rem}
+        .customize-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.55);display:none;align-items:center;justify-content:center;z-index:9998;backdrop-filter:blur(6px);padding:15px}
+        .customize-box{background:#1c1c1e;border:1px solid #3a3a3c;border-radius:20px;padding:24px;max-width:560px;width:100%;max-height:92vh;overflow-y:auto;box-shadow:0 20px 50px rgba(0,0,0,.8)}
+        .field-tag{display:inline-flex;align-items:center;gap:6px;background:#2c2c2e;color:#e4e4e7;border:1px solid #48484a;border-radius:20px;padding:5px 12px;font-size:13px;cursor:pointer;transition:.2s;user-select:none}
+        .field-tag:hover{background:#3a3a3c}
+        .field-tag.active{background:#ca8a04;border-color:#facc15;color:#fff}
+        .add-custom-row{display:flex;gap:8px;margin-top:12px}
+        .add-custom-row input{flex:1;background:#2c2c2e;color:#e4e4e7;border:1px solid #48484a;border-radius:10px;padding:8px 12px;font-size:13px;outline:none}
+        .add-custom-row input::placeholder{color:#71717a}
+        .add-custom-row input:focus{border-color:#facc15}
+        .add-custom-row button{background:#ca8a04;color:#fff;border:none;border-radius:10px;padding:8px 16px;font-weight:600;cursor:pointer;transition:.2s}
+        .add-custom-row button:hover{background:#eab308}
+        @keyframes translatePulse{0%,100%{opacity:1}50%{opacity:.5}}
+        .translating{animation:translatePulse 1s infinite}
+        @media print{
+            @page{margin:3mm}
+            html,body{margin:0!important;padding:0!important;background:#fcf8ed!important;width:100%!important;height:100%!important;display:block!important;-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
+            .no-print{display:none!important}
+            .canvas-container{box-shadow:none!important;width:100%!important;max-width:100%!important;margin:0 auto!important;padding:10px!important;border:8px solid var(--primary-red)!important;outline:3px double var(--primary-gold)!important;outline-offset:-5px!important;border-radius:0!important;background:var(--bg-cream)!important;box-sizing:border-box!important;min-height:calc(100vh - 6mm)!important}
+            .inner-border{padding:14px 18px 18px!important;border:2px solid var(--primary-gold)!important}
+            .editable:hover,.editable:focus{outline:none;background:transparent}
+            .image-upload-wrapper{border:4px double var(--primary-gold)!important;height:190px!important}
+            .image-placeholder-text,.cropper-overlay,.customize-overlay{display:none!important}
+            .detail-row{break-inside:avoid;margin-bottom:5px;padding-bottom:2px}
+            .rasi-grid{height:165px}
+            .rasi-cell{font-size:.8rem}.rasi-center{font-size:.75rem}
+            .horoscope-box{margin-top:10px}
+            .corner-svg{width:68px!important;height:68px!important}
+            .corner-tl{top:-10px!important;left:-10px!important}.corner-tr{top:-10px!important;right:-10px!important}
+            .corner-bl{bottom:-10px!important;left:-10px!important}.corner-br{bottom:-10px!important;right:-10px!important}
+            .horoscope-title{background-color:var(--primary-red)!important;color:#fff!important;-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
+            body>*:not(.canvas-container){display:none!important}
+            .remove-field-btn{display:none!important}
+        }
+        @media(max-width:850px){
+            .canvas-container{width:100%;padding:10px}
+            .image-upload-wrapper{height:250px;max-width:300px}
+            .detail-label{width:120px;font-size:.95rem}.detail-row{font-size:.95rem}
+        }
+    </style>
+</head>
+<body>
+
+<div class="fixed top-4 right-4 no-print flex flex-col gap-2 z-50" style="min-width:200px">
+    <button onclick="window.print()" class="bg-red-700 hover:bg-red-800 text-white font-bold py-2 px-4 rounded-lg shadow-lg flex items-center gap-2 justify-center">
+        <i class="fas fa-file-pdf"></i> Save as PDF / Print
+    </button>
+    <button id="translateBtn" onclick="translateContent()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-lg shadow-lg flex items-center gap-2 justify-center">
+        <i class="fas fa-language"></i> <span id="translateBtnText">Translate to English</span>
+    </button>
+    <button onclick="openCustomize()" class="bg-amber-600 hover:bg-amber-700 text-white font-bold py-2 px-4 rounded-lg shadow-lg flex items-center gap-2 justify-center">
+        <i class="fas fa-sliders-h"></i> Customize Fields
+    </button>
+    <p class="text-xs text-gray-700 bg-white p-2 rounded shadow text-center">Click any text to edit.<br>Click photo to open editor.</p>
+</div>
+
+<div class="cropper-overlay" id="cropperOverlay">
+    <div class="cropper-box">
+        <div class="cropper-header">
+            <h3><i class="fas fa-crop-alt"></i> Adjust &amp; Crop Photo</h3>
+            <div class="flex items-center gap-2">
+                <button class="tool-btn text-xs bg-yellow-600 text-white" onclick="fileInput.click()"><i class="fas fa-image"></i> Change Photo</button>
+                <button class="close-btn" onclick="closeCropper()">&times;</button>
+            </div>
+        </div>
+        <div class="cropper-view-area" id="cropPreviewContainer">
+            <img id="cropPreviewImg" src="" alt="Crop preview">
+            <div class="crop-frame-mask">
+                <div class="crop-target-box" id="cropTargetBox">
+                    <div class="crop-grid-line-v1"></div><div class="crop-grid-line-v2"></div>
+                    <div class="crop-grid-line-h1"></div><div class="crop-grid-line-h2"></div>
+                    <div class="crop-target-bottom-corners"></div>
+                </div>
+            </div>
+        </div>
+        <div class="cropper-toolbar">
+            <div class="tool-btn-group">
+                <button class="tool-btn" onclick="rotate90(-90)"><i class="fas fa-undo"></i> 90 Left</button>
+                <button class="tool-btn" onclick="rotate90(90)"><i class="fas fa-redo"></i> 90 Right</button>
+                <button class="tool-btn" id="flipXBtn" onclick="toggleFlipX()"><i class="fas fa-exchange-alt"></i> Flip</button>
+            </div>
+            <div class="tool-btn-group">
+                <button class="tool-btn" onclick="adjustZoom(-0.15)"><i class="fas fa-search-minus"></i></button>
+                <button class="tool-btn" onclick="adjustZoom(0.15)"><i class="fas fa-search-plus"></i></button>
+                <button class="tool-btn" onclick="resetCrop()"><i class="fas fa-sync-alt"></i> Reset</button>
+            </div>
+        </div>
+        <div class="slider-group mt-3">
+            <label><i class="fas fa-search"></i> Zoom</label>
+            <input type="range" id="zoomSlider" min="0.1" max="4" step="0.01" value="1">
+            <label class="ml-4"><i class="fas fa-compass"></i> Rotate</label>
+            <input type="range" id="rotateSlider" min="0" max="360" value="0">
+            <span id="rotateValText" class="text-xs text-yellow-400 font-mono w-8">0</span>
+        </div>
+        <div class="controls mt-4">
+            <button class="danger" onclick="closeCropper()"><i class="fas fa-times"></i> Cancel</button>
+            <button onclick="applyCrop()"><i class="fas fa-check"></i> Save Photo</button>
+        </div>
+        <p class="text-xs text-gray-400 mt-2 text-center">Drag to reposition. Yellow frame = crop area.</p>
+    </div>
+</div>
+
+<div class="customize-overlay" id="customizeOverlay">
+    <div class="customize-box">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+            <h3 style="color:#facc15;font-size:1.2rem;font-weight:700;margin:0"><i class="fas fa-sliders-h"></i> Customize Fields</h3>
+            <button class="close-btn" onclick="closeCustomize()">&times;</button>
+        </div>
+        <p style="color:#a1a1aa;font-size:13px;margin-bottom:14px">Toggle fields on/off. Add your own custom fields below.</p>
+        <div style="color:#facc15;font-size:12px;font-weight:700;letter-spacing:1px;margin-bottom:8px">AVAILABLE FIELDS</div>
+        <div id="fieldTagsContainer" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px"></div>
+        <div style="color:#facc15;font-size:12px;font-weight:700;letter-spacing:1px;margin-bottom:8px">ADD CUSTOM FIELD</div>
+        <div class="add-custom-row">
+            <input type="text" id="customFieldLabel" placeholder="Label (e.g. Hobbies)" />
+            <input type="text" id="customFieldValue" placeholder="Value (e.g. Cricket, Music)" style="flex:1.5" />
+            <button onclick="addCustomField()"><i class="fas fa-plus"></i> Add</button>
+        </div>
+        <div style="margin-top:20px;display:flex;justify-content:flex-end">
+            <button onclick="closeCustomize()" style="background:#ca8a04;color:#fff;border:none;border-radius:10px;padding:10px 24px;font-weight:700;cursor:pointer;font-size:15px">Done</button>
+        </div>
+    </div>
+</div>
+
+<div class="canvas-container" id="biodata-canvas">
+    <svg class="corner-svg corner-tl" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+            <linearGradient id="goldGradTL" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#ffe89c"/><stop offset="50%" stop-color="#c2983b"/><stop offset="100%" stop-color="#7a5b13"/>
+            </linearGradient>
+            <linearGradient id="flameGradTL" x1="0%" y1="100%" x2="0%" y2="0%">
+                <stop offset="0%" stop-color="#d32f2f"/><stop offset="40%" stop-color="#ff7043"/><stop offset="80%" stop-color="#ffeb3b"/><stop offset="100%" stop-color="#ffffff"/>
+            </linearGradient>
+            <linearGradient id="lotusGradTL" x1="0%" y1="100%" x2="0%" y2="0%">
+                <stop offset="0%" stop-color="#880e4f"/><stop offset="60%" stop-color="#e91e63"/><stop offset="100%" stop-color="#f8bbd0"/>
+            </linearGradient>
+        </defs>
+        <path d="M 4,95 L 4,20 C 4,11 11,4 20,4 L 95,4" fill="none" stroke="url(#goldGradTL)" stroke-width="5" stroke-linecap="round"/>
+        <path d="M 12,95 L 12,24 C 12,17 17,12 24,12 L 95,12" fill="none" stroke="#a31d1d" stroke-width="2"/>
+        <path d="M 0,42 C 25,42 42,25 42,0" fill="none" stroke="url(#goldGradTL)" stroke-width="1.8" stroke-dasharray="3,3"/>
+        <g transform="translate(24,24)">
+            <path d="M 0,-16 C -6,-8 -8,0 0,8 C 8,0 6,-8 0,-16 Z" fill="url(#lotusGradTL)"/>
+            <path d="M -2,-12 C -12,-6 -14,2 -6,8 C -1,5 -1,-4 -2,-12 Z" fill="url(#lotusGradTL)" opacity=".9"/>
+            <path d="M 2,-12 C 12,-6 14,2 6,8 C 1,5 1,-4 2,-12 Z" fill="url(#lotusGradTL)" opacity=".9"/>
+            <path d="M -10,6 C -5,12 5,12 10,6 C 4,4 -4,4 -10,6 Z" fill="#2e7d32"/>
+        </g>
+        <g transform="translate(68,28) scale(.85)">
+            <ellipse cx="0" cy="-14" rx="9" ry="13" fill="#ffeb3b" opacity=".3"/>
+            <path d="M 0,-24 C -5,-16 -4,-8 0,0 C 4,-8 5,-16 0,-24 Z" fill="url(#flameGradTL)"/>
+            <path d="M -16,0 C -16,14 16,14 16,0 C 10,-2 6,-5 0,-5 C -6,-5 -10,-2 -16,0 Z" fill="url(#goldGradTL)"/>
+            <ellipse cx="0" cy="-1" rx="8" ry="2" fill="#5d4037"/>
+        </g>
+        <circle cx="16" cy="16" r="3" fill="url(#goldGradTL)"/>
+        <circle cx="28" cy="8" r="2.5" fill="#a31d1d"/>
+        <circle cx="8" cy="28" r="2.5" fill="#a31d1d"/>
+    </svg>
+    <svg class="corner-svg corner-tr" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <path d="M 96,95 L 96,20 C 96,11 89,4 80,4 L 5,4" fill="none" stroke="url(#goldGradTL)" stroke-width="5" stroke-linecap="round"/>
+        <path d="M 88,95 L 88,24 C 88,17 83,12 76,12 L 5,12" fill="none" stroke="#a31d1d" stroke-width="2"/>
+        <g transform="translate(76,24)">
+            <path d="M 0,-16 C -6,-8 -8,0 0,8 C 8,0 6,-8 0,-16 Z" fill="url(#lotusGradTL)"/>
+            <path d="M -10,6 C -5,12 5,12 10,6 C 4,4 -4,4 -10,6 Z" fill="#2e7d32"/>
+        </g>
+        <g transform="translate(32,28) scale(.85)">
+            <path d="M 0,-24 C -5,-16 -4,-8 0,0 C 4,-8 5,-16 0,-24 Z" fill="url(#flameGradTL)"/>
+            <path d="M -16,0 C -16,14 16,14 16,0 C 10,-2 6,-5 0,-5 C -6,-5 -10,-2 -16,0 Z" fill="url(#goldGradTL)"/>
+            <ellipse cx="0" cy="-1" rx="8" ry="2" fill="#5d4037"/>
+        </g>
+        <circle cx="84" cy="16" r="3" fill="url(#goldGradTL)"/>
+        <circle cx="72" cy="8" r="2.5" fill="#a31d1d"/>
+        <circle cx="92" cy="28" r="2.5" fill="#a31d1d"/>
+    </svg>
+    <svg class="corner-svg corner-bl" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <path d="M 4,5 L 4,80 C 4,89 11,96 20,96 L 95,96" fill="none" stroke="url(#goldGradTL)" stroke-width="5" stroke-linecap="round"/>
+        <path d="M 12,5 L 12,76 C 12,83 17,88 24,88 L 95,88" fill="none" stroke="#a31d1d" stroke-width="2"/>
+        <g transform="translate(24,76)">
+            <path d="M 0,-16 C -6,-8 -8,0 0,8 C 8,0 6,-8 0,-16 Z" fill="url(#lotusGradTL)"/>
+            <path d="M -10,6 C -5,12 5,12 10,6 C 4,4 -4,4 -10,6 Z" fill="#2e7d32"/>
+        </g>
+        <g transform="translate(68,72) scale(.85)">
+            <path d="M 0,-24 C -5,-16 -4,-8 0,0 C 4,-8 5,-16 0,-24 Z" fill="url(#flameGradTL)"/>
+            <path d="M -16,0 C -16,14 16,14 16,0 C 10,-2 6,-5 0,-5 C -6,-5 -10,-2 -16,0 Z" fill="url(#goldGradTL)"/>
+            <ellipse cx="0" cy="-1" rx="8" ry="2" fill="#5d4037"/>
+        </g>
+        <circle cx="16" cy="84" r="3" fill="url(#goldGradTL)"/>
+        <circle cx="28" cy="92" r="2.5" fill="#a31d1d"/>
+        <circle cx="8" cy="72" r="2.5" fill="#a31d1d"/>
+    </svg>
+    <svg class="corner-svg corner-br" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <path d="M 96,5 L 96,80 C 96,89 89,96 80,96 L 5,96" fill="none" stroke="url(#goldGradTL)" stroke-width="5" stroke-linecap="round"/>
+        <path d="M 88,5 L 88,76 C 88,83 83,88 76,88 L 5,88" fill="none" stroke="#a31d1d" stroke-width="2"/>
+        <g transform="translate(76,76)">
+            <path d="M 0,-16 C -6,-8 -8,0 0,8 C 8,0 6,-8 0,-16 Z" fill="url(#lotusGradTL)"/>
+            <path d="M -10,6 C -5,12 5,12 10,6 C 4,4 -4,4 -10,6 Z" fill="#2e7d32"/>
+        </g>
+        <g transform="translate(32,72) scale(.85)">
+            <path d="M 0,-24 C -5,-16 -4,-8 0,0 C 4,-8 5,-16 0,-24 Z" fill="url(#flameGradTL)"/>
+            <path d="M -16,0 C -16,14 16,14 16,0 C 10,-2 6,-5 0,-5 C -6,-5 -10,-2 -16,0 Z" fill="url(#goldGradTL)"/>
+            <ellipse cx="0" cy="-1" rx="8" ry="2" fill="#5d4037"/>
+        </g>
+        <circle cx="84" cy="84" r="3" fill="url(#goldGradTL)"/>
+        <circle cx="72" cy="92" r="2.5" fill="#a31d1d"/>
+        <circle cx="92" cy="72" r="2.5" fill="#a31d1d"/>
+    </svg>
+
+    <div class="inner-border">
+        <div class="toran-header-wrapper">
+            <svg class="toran-svg" viewBox="0 0 800 38" preserveAspectRatio="none">
+                <defs>
+                    <linearGradient id="leafGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stop-color="#4caf50"/><stop offset="100%" stop-color="#1b5e20"/>
+                    </linearGradient>
+                    <radialGradient id="marigoldGrad" cx="50%" cy="50%" r="50%">
+                        <stop offset="0%" stop-color="#ffe082"/><stop offset="55%" stop-color="#ff9800"/><stop offset="100%" stop-color="#e65100"/>
+                    </radialGradient>
+                </defs>
+                <path d="M 10,6 Q 200,24 400,10 Q 600,24 790,6" fill="none" stroke="#a31d1d" stroke-width="2.5"/>
+                <path d="M 10,6 Q 200,24 400,10 Q 600,24 790,6" fill="none" stroke="#c2983b" stroke-width="1.2" stroke-dasharray="4,6"/>
+                <g transform="translate(60,10)"><path d="M0,0 Q-8,14 0,24 Q8,14 0,0 Z" fill="url(#leafGrad)"/></g>
+                <circle cx="100" cy="18" r="7" fill="url(#marigoldGrad)"/>
+                <g transform="translate(180,14)"><path d="M0,0 Q-8,14 0,24 Q8,14 0,0 Z" fill="url(#leafGrad)"/></g>
+                <circle cx="220" cy="20" r="7" fill="url(#marigoldGrad)"/>
+                <g transform="translate(300,15)"><path d="M0,0 Q-8,14 0,24 Q8,14 0,0 Z" fill="url(#leafGrad)"/></g>
+                <circle cx="340" cy="16" r="7" fill="url(#marigoldGrad)"/>
+                <circle cx="400" cy="12" r="9" fill="url(#marigoldGrad)"/>
+                <g transform="translate(460,15)"><path d="M0,0 Q-8,14 0,24 Q8,14 0,0 Z" fill="url(#leafGrad)"/></g>
+                <circle cx="500" cy="19" r="7" fill="url(#marigoldGrad)"/>
+                <g transform="translate(580,16)"><path d="M0,0 Q-8,14 0,24 Q8,14 0,0 Z" fill="url(#leafGrad)"/></g>
+                <circle cx="620" cy="20" r="7" fill="url(#marigoldGrad)"/>
+                <g transform="translate(700,10)"><path d="M0,0 Q-8,14 0,24 Q8,14 0,0 Z" fill="url(#leafGrad)"/></g>
+            </svg>
+        </div>
+
+        <div class="flex justify-between items-center mb-4 text-red-theme font-bold text-lg">
+            <div contenteditable="true" class="editable px-2">శ్రీ రస్తు</div>
+            <div contenteditable="true" class="editable px-2">|| శ్రీ గణేశాయ నమః ||</div>
+            <div contenteditable="true" class="editable px-2">శుభమస్తు</div>
+        </div>
+
+        <div class="text-center mb-3 flex justify-center items-center gap-4">
+            <svg class="h-8 w-8" viewBox="0 0 50 50">
+                <path d="M25,3 C22,10 22,16 25,22 C28,16 28,10 25,3 Z" fill="#f57c00"/>
+                <path d="M8,22 C8,34 42,34 42,22 C34,20 28,18 25,18 C22,18 16,20 8,22 Z" fill="#c2983b"/>
+                <path d="M18,31 C15,38 35,38 32,31 Z" fill="#996515"/>
+            </svg>
+            <svg class="h-14 w-14 inline-block" viewBox="0 0 60 60">
+                <defs>
+                    <linearGradient id="kalashGold" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#ffe082"/><stop offset="50%" stop-color="#c2983b"/><stop offset="100%" stop-color="#6d4c41"/>
+                    </linearGradient>
+                </defs>
+                <path d="M14,22 Q24,10 30,22 Q36,10 46,22 Z" fill="#2e7d32"/>
+                <path d="M18,22 C14,24 12,32 18,44 C22,48 38,48 42,44 C48,32 46,24 42,22 Z" fill="url(#kalashGold)"/>
+                <circle cx="30" cy="33" r="5" fill="#a31d1d"/>
+                <path d="M30,30 L30,36 M27,33 L33,33" stroke="#ffe082" stroke-width="1.5"/>
+            </svg>
+            <svg class="h-8 w-8" viewBox="0 0 50 50" style="transform:scaleX(-1)">
+                <path d="M25,3 C22,10 22,16 25,22 C28,16 28,10 25,3 Z" fill="#f57c00"/>
+                <path d="M8,22 C8,34 42,34 42,22 C34,20 28,18 25,18 C22,18 16,20 8,22 Z" fill="#c2983b"/>
+                <path d="M18,31 C15,38 35,38 32,31 Z" fill="#996515"/>
+            </svg>
+        </div>
+
+        <div class="text-center mb-8">
+            <h1 contenteditable="true" class="editable text-5xl font-bold text-red-theme tracking-wide" style="text-shadow:1px 1px 2px rgba(0,0,0,.1)">జన్మపత్రిక</h1>
+        </div>
+
+        <div class="flex flex-row justify-between">
+            <div class="w-2/3 pr-6 relative z-10">
+                <div class="bg-orange-50 bg-opacity-50 p-4 rounded-xl border border-orange-200 shadow-sm relative" id="fieldsContainer"></div>
+            </div>
+            <div class="w-1/3 flex flex-col items-end">
+                <div class="image-upload-wrapper w-48 h-64 border-4 border-yellow-500 rounded shadow-md mb-6 relative" style="border-style:double" id="photoWrapper">
+                    <div class="image-placeholder-text text-center text-gray-400 p-2" id="placeholderText">
+                        <i class="fas fa-camera text-4xl mb-2"></i><br>
+                        <span class="text-sm">Add Photo</span>
+                    </div>
+                    <img id="profilePreview" src="" alt="Profile Photo" style="display:none;object-fit:cover;width:100%;height:100%;position:absolute;top:0;left:0;z-index:10">
+                    <input type="file" id="profileUpload" class="hidden" accept="image/*" onchange="handleFileUpload(event)">
+                </div>
+                <div class="horoscope-box w-full shadow-lg relative z-20">
+                    <div class="horoscope-title editable" contenteditable="true">జన్మ కుండలి - రాశి చక్రం</div>
+                    <div class="rasi-grid">
+                        <div class="rasi-cell editable" contenteditable="true"></div>
+                        <div class="rasi-cell editable" contenteditable="true"></div>
+                        <div class="rasi-cell editable" contenteditable="true"></div>
+                        <div class="rasi-cell editable" contenteditable="true"></div>
+                        <div class="rasi-cell editable" contenteditable="true"></div>
+                        <div class="rasi-center editable" contenteditable="true">జన్మ కుండలి<br>రాశి చక్రం</div>
+                        <div class="rasi-cell editable" contenteditable="true"></div>
+                        <div class="rasi-cell editable" contenteditable="true"></div>
+                        <div class="rasi-cell editable" contenteditable="true"></div>
+                        <div class="rasi-cell editable" contenteditable="true"></div>
+                        <div class="rasi-cell editable" contenteditable="true"></div>
+                        <div class="rasi-cell editable" contenteditable="true"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+var ALL_FIELDS=[
+  {id:"name",icon:"fas fa-user",te:"\u0c2a\u0c47\u0c30\u0c41",en:"Name",valueTe:"",valueEn:""},
+  {id:"nakshatra",icon:"fas fa-star",te:"\u0c28\u0c15\u0c4d\u0c37\u0c24\u0c4d\u0c30\u0c02",en:"Birth Star",valueTe:"",valueEn:""},
+  {id:"rashi",icon:"fas fa-moon",te:"\u0c1c\u0c28\u0c4d\u0c2e \u0c30\u0c3e\u0c36\u0c3f",en:"Birth Sign",valueTe:"",valueEn:""},
+  {id:"dob",icon:"far fa-calendar-alt",te:"\u0c1c\u0c28\u0c4d\u0c2e \u0c24\u0c47\u0c26\u0c40",en:"Date of Birth",valueTe:"",valueEn:""},
+  {id:"time",icon:"far fa-clock",te:"\u0c2a\u0c41\u0c1f\u0c4d\u0c1f\u0c3f\u0c28 \u0c38\u0c2e\u0c2f\u0c02",en:"Birth Time",valueTe:"",valueEn:""},
+  {id:"place",icon:"fas fa-map-marker-alt",te:"\u0c1c\u0c28\u0c4d\u0c2e \u0c38\u0c4d\u0c25\u0c32\u0c02",en:"Birth Place",valueTe:"",valueEn:""},
+  {id:"father",icon:"fas fa-male",te:"\u0c24\u0c02\u0c21\u0c4d\u0c30\u0c3f \u0c2a\u0c47\u0c30\u0c41",en:"Father Name",valueTe:"",valueEn:""},
+  {id:"mother",icon:"fas fa-female",te:"\u0c24\u0c32\u0c4d\u0c32\u0c3f \u0c2a\u0c47\u0c30\u0c41",en:"Mother Name",valueTe:"",valueEn:""},
+  {id:"siblings",icon:"fas fa-users",te:"\u0c38\u0c4b\u0c26\u0c30\u0c41\u0c32\u0c41/\u0c38\u0c4b\u0c26\u0c30\u0c40\u0c2e\u0c23\u0c41\u0c32\u0c41",en:"Siblings",valueTe:"",valueEn:""},
+  {id:"education",icon:"fas fa-graduation-cap",te:"\u0c05\u0c27\u0c4d\u0c2f\u0c2f\u0c28\u0c02",en:"Education",valueTe:"",valueEn:""},
+  {id:"job",icon:"fas fa-briefcase",te:"\u0c09\u0c26\u0c4d\u0c2f\u0c4b\u0c17\u0c02",en:"Occupation",valueTe:"",valueEn:""},
+  {id:"height",icon:"fas fa-text-height",te:"\u0c0e\u0c24\u0c4d\u0c24\u0c41",en:"Height",valueTe:"",valueEn:""},
+  {id:"caste",icon:"fas fa-om",te:"\u0c15\u0c41\u0c32\u0c02",en:"Caste",valueTe:"",valueEn:""},
+  {id:"religion",icon:"fas fa-dharmachakra",te:"\u0c2e\u0c24\u0c02",en:"Religion",valueTe:"",valueEn:""},
+  {id:"address",icon:"fas fa-home",te:"\u0c1a\u0c3f\u0c30\u0c41\u0c28\u0c3e\u0c2e\u0c3e",en:"Address",valueTe:"",valueEn:""},
+  {id:"phone",icon:"fas fa-phone-alt",te:"\u0c15\u0c3e\u0c02\u0c1f\u0c3e\u0c15\u0c4d\u0c1f\u0c4d \u0c28\u0c46\u0c02",en:"Contact No",valueTe:"",valueEn:""},
+  {id:"salary",icon:"fas fa-rupee-sign",te:"\u0c1c\u0c40\u0c24\u0c02",en:"Salary",valueTe:"",valueEn:"",optional:true},
+  {id:"hobbies",icon:"fas fa-heart",te:"\u0c05\u0c2d\u0c3f\u0c30\u0c41\u0c1a\u0c41\u0c32\u0c41",en:"Hobbies",valueTe:"",valueEn:"",optional:true},
+  {id:"bloodgroup",icon:"fas fa-tint",te:"\u0c2c\u0c4d\u0c32\u0c21\u0c4d \u0c17\u0c4d\u0c30\u0c42\u0c2a\u0c4d",en:"Blood Group",valueTe:"",valueEn:"",optional:true},
+  {id:"complexion",icon:"fas fa-palette",te:"\u0c30\u0c02\u0c17\u0c41",en:"Complexion",valueTe:"",valueEn:"",optional:true},
+  {id:"weight",icon:"fas fa-weight",te:"\u0c2c\u0c30\u0c41\u0c35\u0c41",en:"Weight",valueTe:"",valueEn:"",optional:true},
+  {id:"property",icon:"fas fa-building",te:"\u0c06\u0c38\u0c4d\u0c24\u0c3f",en:"Property",valueTe:"",valueEn:"",optional:true},
+  {id:"languages",icon:"fas fa-comments",te:"\u0c2d\u0c3e\u0c37\u0c32\u0c41",en:"Languages",valueTe:"",valueEn:"",optional:true}
+];
+var activeFields=ALL_FIELDS.filter(function(f){return!f.optional}).map(function(f){return f.id});
+var customFields=[];
+var currentLang="te";
+function escHtml(s){if(!s)return"";return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;")}
+function renderFields(){
+  var c=document.getElementById("fieldsContainer");c.innerHTML="";
+  activeFields.forEach(function(id){var f=ALL_FIELDS.find(function(x){return x.id===id});if(f)c.appendChild(createFieldRow(f))});
+  customFields.forEach(function(cf){c.appendChild(createCustomFieldRow(cf))});
+}
+function createFieldRow(field){
+  var label=currentLang==="te"?field.te:field.en;
+  var value=currentLang==="te"?(field.valueTe||""):(field.valueEn||"");
+  var row=document.createElement("div");row.className="detail-row";row.dataset.fieldId=field.id;
+  row.innerHTML="<div class=\"detail-icon\"><i class=\""+field.icon+"\"></i></div>"
+    +"<div class=\"detail-label editable\" contenteditable=\"true\" onblur=\"saveLabel(this,\'"+field.id+"\')\">"+escHtml(label)+"</div>"
+    +"<div class=\"detail-colon\">:</div>"
+    +"<div class=\"detail-value editable\" contenteditable=\"true\" onblur=\"saveValue(this,\'"+field.id+"\')\">"+escHtml(value)+"</div>"
+    +"<button class=\"remove-field-btn\" onclick=\"removeField(\'"+field.id+"\')\">x</button>";
+  return row;
+}
+function createCustomFieldRow(cf){
+  var row=document.createElement("div");row.className="detail-row";row.dataset.customId=cf.id;
+  row.innerHTML="<div class=\"detail-icon\"><i class=\"fas fa-circle\"></i></div>"
+    +"<div class=\"detail-label editable\" contenteditable=\"true\" onblur=\"saveCustomLabel(this,\'"+cf.id+"\')\">"+escHtml(cf.label)+"</div>"
+    +"<div class=\"detail-colon\">:</div>"
+    +"<div class=\"detail-value editable\" contenteditable=\"true\" onblur=\"saveCustomValue(this,\'"+cf.id+"\')\">"+escHtml(cf.value)+"</div>"
+    +"<button class=\"remove-field-btn\" onclick=\"removeCustomField(\'"+cf.id+"\')\">x</button>";
+  return row;
+}
+function saveLabel(el,id){var f=ALL_FIELDS.find(function(x){return x.id===id});if(!f)return;if(currentLang==="te")f.te=el.textContent.trim();else f.en=el.textContent.trim()}
+function saveValue(el,id){var f=ALL_FIELDS.find(function(x){return x.id===id});if(!f)return;if(currentLang==="te")f.valueTe=el.textContent.trim();else f.valueEn=el.textContent.trim()}
+function saveCustomLabel(el,id){var cf=customFields.find(function(c){return c.id===id});if(cf)cf.label=el.textContent.trim()}
+function saveCustomValue(el,id){var cf=customFields.find(function(c){return c.id===id});if(cf)cf.value=el.textContent.trim()}
+function removeField(id){activeFields=activeFields.filter(function(f){return f!==id});renderFields();syncTagStates()}
+function removeCustomField(id){customFields=customFields.filter(function(c){return c.id!==id});renderFields()}
+function flushEditsToModel(){
+  document.querySelectorAll(".detail-row[data-field-id]").forEach(function(row){
+    var id=row.dataset.fieldId;var f=ALL_FIELDS.find(function(x){return x.id===id});if(!f)return;
+    var lEl=row.querySelector(".detail-label");var vEl=row.querySelector(".detail-value");
+    if(lEl){if(currentLang==="te")f.te=lEl.textContent.trim();else f.en=lEl.textContent.trim()}
+    if(vEl){if(currentLang==="te")f.valueTe=vEl.textContent.trim();else f.valueEn=vEl.textContent.trim()}
+  });
+  document.querySelectorAll(".detail-row[data-custom-id]").forEach(function(row){
+    var id=row.dataset.customId;var cf=customFields.find(function(c){return c.id===id});if(!cf)return;
+    var lEl=row.querySelector(".detail-label");var vEl=row.querySelector(".detail-value");
+    if(lEl)cf.label=lEl.textContent.trim();if(vEl)cf.value=vEl.textContent.trim();
+  });
+}
+function translateContent(){
+  var btn=document.getElementById("translateBtn");var btnText=document.getElementById("translateBtnText");
+  btn.classList.add("translating");btnText.textContent="Translating...";
+  setTimeout(function(){
+    flushEditsToModel();
+    if(currentLang==="te"){currentLang="en";btnText.textContent="Translate to Telugu"}
+    else{currentLang="te";btnText.textContent="Translate to English"}
+    renderFields();btn.classList.remove("translating");
+  },500);
+}
+function openCustomize(){flushEditsToModel();buildFieldTags();document.getElementById("customizeOverlay").style.display="flex"}
+function closeCustomize(){document.getElementById("customizeOverlay").style.display="none";renderFields()}
+function buildFieldTags(){
+  var c=document.getElementById("fieldTagsContainer");c.innerHTML="";
+  ALL_FIELDS.forEach(function(field){
+    var tag=document.createElement("div");
+    tag.className="field-tag"+(activeFields.indexOf(field.id)>=0?" active":"");
+    tag.dataset.id=field.id;
+    tag.innerHTML="<i class=\""+field.icon+"\" style=\"font-size:11px\"></i> "+(currentLang==="te"?field.te:field.en);
+    tag.onclick=function(){toggleField(field.id,tag)};
+    c.appendChild(tag);
+  });
+}
+function toggleField(id,tagEl){
+  var idx=activeFields.indexOf(id);
+  if(idx>=0){activeFields.splice(idx,1);tagEl.classList.remove("active")}
+  else{activeFields.push(id);tagEl.classList.add("active")}
+}
+function syncTagStates(){
+  document.querySelectorAll(".field-tag").forEach(function(tag){
+    if(activeFields.indexOf(tag.dataset.id)>=0)tag.classList.add("active");
+    else tag.classList.remove("active");
+  });
+}
+function addCustomField(){
+  var lInput=document.getElementById("customFieldLabel");var vInput=document.getElementById("customFieldValue");
+  var label=lInput.value.trim();var value=vInput.value.trim();
+  if(!label){lInput.focus();return}
+  customFields.push({id:"custom_"+Date.now(),label:label,value:value,icon:"fas fa-circle"});
+  lInput.value="";vInput.value="";renderFields();
+}
+var currentFile=null,cropImg=new Image(),isDragging=false,startX=0,startY=0,translateX=0,translateY=0,scale=1,rotation=0,flipX=1,imageLoaded=false,originalImageData=null,baseW=220,baseH=293;
+var overlay=document.getElementById("cropperOverlay");
+var previewImg=document.getElementById("cropPreviewImg");
+var zoomSlider=document.getElementById("zoomSlider");
+var rotateSlider=document.getElementById("rotateSlider");
+var rotateValText=document.getElementById("rotateValText");
+var flipXBtn=document.getElementById("flipXBtn");
+var placeholderText=document.getElementById("placeholderText");
+var profileImg=document.getElementById("profilePreview");
+var photoWrapper=document.getElementById("photoWrapper");
+var fileInput=document.getElementById("profileUpload");
+function handleFileUpload(event){
+  var file=event.target.files[0];if(!file)return;
+  var reader=new FileReader();
+  reader.onload=function(e){
+    var imageData=e.target.result;originalImageData=imageData;
+    cropImg=new Image();
+    cropImg.onload=function(){
+      imageLoaded=true;scale=1;rotation=0;flipX=1;translateX=0;translateY=0;
+      var maxW=260,maxH=320;var aspect=cropImg.naturalWidth/cropImg.naturalHeight;
+      if(aspect>maxW/maxH){baseW=maxW;baseH=maxW/aspect}else{baseH=maxH;baseW=maxH*aspect}
+      previewImg.style.width=baseW+"px";previewImg.style.height=baseH+"px";previewImg.src=imageData;
+      zoomSlider.value=1;rotateSlider.value=0;if(rotateValText)rotateValText.textContent="0";
+      if(flipXBtn)flipXBtn.classList.remove("active-toggle");
+      applyTransform();overlay.style.display="flex";
+    };cropImg.src=imageData;
+  };reader.readAsDataURL(file);event.target.value="";
+}
+function openCropper(){if(!imageLoaded&&!cropImg.src){fileInput.click();return}if(cropImg.src){previewImg.src=cropImg.src;applyTransform();overlay.style.display="flex"}}
+function closeCropper(){overlay.style.display="none"}
+function resetCrop(){scale=1;rotation=0;flipX=1;translateX=0;translateY=0;zoomSlider.value=1;rotateSlider.value=0;if(rotateValText)rotateValText.textContent="0";if(flipXBtn)flipXBtn.classList.remove("active-toggle");applyTransform()}
+function rotate90(degrees){rotation=(rotation+degrees)%360;if(rotation<0)rotation+=360;rotateSlider.value=rotation;applyTransform()}
+function toggleFlipX(){flipX=flipX===1?-1:1;if(flipXBtn){if(flipX===-1)flipXBtn.classList.add("active-toggle");else flipXBtn.classList.remove("active-toggle")}applyTransform()}
+function adjustZoom(delta){scale=Math.min(4,Math.max(0.1,scale+delta));zoomSlider.value=scale;applyTransform()}
+function applyCrop(){
+  if(!imageLoaded||!cropImg.src)return;
+  try{
+    var outW=600,outH=800;var canvas=document.createElement("canvas");canvas.width=outW;canvas.height=outH;
+    var ctx=canvas.getContext("2d");ctx.fillStyle="#fff";ctx.fillRect(0,0,outW,outH);
+    var ratio=outW/220;
+    ctx.save();ctx.translate(outW/2,outH/2);ctx.translate(translateX*ratio,translateY*ratio);
+    ctx.rotate((rotation*Math.PI)/180);ctx.scale(scale*flipX,scale);
+    ctx.drawImage(cropImg,-baseW*ratio/2,-baseH*ratio/2,baseW*ratio,baseH*ratio);ctx.restore();
+    profileImg.src=canvas.toDataURL("image/jpeg",0.95);
+    Object.assign(profileImg.style,{transform:"none",position:"absolute",top:"0",left:"0",width:"100%",height:"100%",objectFit:"cover",display:"block"});
+    placeholderText.style.display="none";closeCropper();
+  }catch(e){console.error(e);profileImg.src=cropImg.src;profileImg.style.display="block";placeholderText.style.display="none";closeCropper()}
+}
+function applyTransform(){previewImg.style.transform="translate("+translateX+"px,"+translateY+"px) scale("+(scale*flipX)+","+scale+") rotate("+rotation+"deg)";previewImg.style.transformOrigin="center center";if(rotateValText)rotateValText.textContent=Math.round(rotation)}
+zoomSlider.addEventListener("input",function(){scale=parseFloat(this.value);applyTransform()});
+rotateSlider.addEventListener("input",function(){rotation=parseFloat(this.value);applyTransform()});
+var cropContainer=document.getElementById("cropPreviewContainer");
+cropContainer.addEventListener("mousedown",function(e){
+  if(!imageLoaded)return;isDragging=true;var rect=cropContainer.getBoundingClientRect();
+  startX=e.clientX-rect.left;startY=e.clientY-rect.top;
+  document.addEventListener("mousemove",onDrag);document.addEventListener("mouseup",endDrag);
+  cropContainer.style.cursor="grabbing";
+});
+function onDrag(e){if(!isDragging)return;var rect=cropContainer.getBoundingClientRect();var x=e.clientX-rect.left,y=e.clientY-rect.top;translateX+=x-startX;translateY+=y-startY;startX=x;startY=y;applyTransform()}
+function endDrag(){isDragging=false;cropContainer.style.cursor="grab";document.removeEventListener("mousemove",onDrag);document.removeEventListener("mouseup",endDrag)}
+photoWrapper.addEventListener("click",function(e){if(e.target.tagName!=="INPUT")openCropper()});
+overlay.addEventListener("click",function(e){if(e.target===overlay)closeCropper()});
+document.getElementById("customizeOverlay").addEventListener("click",function(e){if(e.target===this)closeCustomize()});
+document.addEventListener("keydown",function(e){if(e.key==="Escape"){closeCropper();closeCustomize()}});
+window.addEventListener("load",function(){if(profileImg.src&&profileImg.src!=""&&profileImg.src!==window.location.href){profileImg.style.display="block";placeholderText.style.display="none";imageLoaded=true;cropImg.src=profileImg.src;originalImageData=profileImg.src}});
+renderFields();
+</script>
+</body>
+</html>
